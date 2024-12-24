@@ -21,13 +21,22 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex", // フレックスボックスを使用
+        flexDirection: "column", // 縦方向に配置
+        justifyContent: "center", // 垂直方向の中央揃え
+        alignItems: "center", // 水平方向の中央揃え
+        minHeight: "100vh", // 画面全体の高さを確保
+        textAlign: "center", // テキストを中央揃え
+      }}
+    >
       <h1>Welcome to Croquis</h1>
       <p>This is your new home page!</p>
 
       <Level onLevelSelect={setSelectedLevel} />
       <Time onTimeSelect={setSelectedTime} />
-      
+
       <button
         onClick={handleStartClick}
         disabled={!isFormComplete}
@@ -44,10 +53,7 @@ export default function Home() {
         Start Croquis !
       </button>
 
-
       <Report />
-
-
     </div>
   );
 }

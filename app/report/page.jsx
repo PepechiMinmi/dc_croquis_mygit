@@ -21,7 +21,7 @@ export default function Report() {
                 const data = event.target.result;
                 if (userId) {
                     // ユーザーIDでフィルタリング
-                    const filteredLogs = data.filter(log => log.userId === userId);
+                    const filteredLogs = data.filter((log) => log.userId === userId);
                     setLogs(filteredLogs);
                 } else {
                     setLogs(data); // ログデータを状態に保存
@@ -44,10 +44,21 @@ export default function Report() {
     }, [userId]);
 
     return (
-        <div>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "100vh",
+                textAlign: "center",
+                padding: "20px",
+                backgroundColor: 'rgb(220,220,220)',
+            }}
+        >
             <h1>This is Report Hierarchy page</h1>
 
-            <div>
+            <div style={{ marginBottom: "20px" }}>
                 <label>
                     ユーザーIDでフィルタ:
                     <input
@@ -55,18 +66,41 @@ export default function Report() {
                         value={userId}
                         onChange={(e) => setUserId(e.target.value)}
                         placeholder="ユーザーIDを入力"
+                        style={{ marginLeft: "10px", padding: "5px" }}
                     />
                 </label>
-                <button onClick={fetchLogs}>フィルタを適用</button>
+                <button
+                    onClick={fetchLogs}
+                    style={{
+                        padding: "5px 10px",
+                        marginLeft: "10px",
+                        backgroundColor: "blue",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                    }}
+                >
+                    フィルタを適用
+                </button>
             </div>
 
             {/* ログデータの表示 */}
-            <div style={{ marginTop: "20px" }}>
+            <div style={{ marginTop: "20px", maxWidth: "600px", width: "100%" }}>
                 <h2>Logs:</h2>
                 {logs.length > 0 ? (
-                    <ul>
+                    <ul style={{ listStyle: "none", padding: 0 }}>
                         {logs.map((log, index) => (
-                            <li key={index} style={{ marginBottom: "10px" }}>
+                            <li
+                                key={index}
+                                style={{
+                                    marginBottom: "10px",
+                                    padding: "10px",
+                                    backgroundColor: "#ffffff",
+                                    borderRadius: "5px",
+                                    boxShadow: "0 0 5px rgba(0,0,0,0.1)",
+                                }}
+                            >
                                 <strong>ユーザーID:</strong> {log.userId} <br />
                                 <strong>類似度スコア:</strong> {log.similarityScore}% <br />
                                 <strong>経験値:</strong> {log.experience} <br />
